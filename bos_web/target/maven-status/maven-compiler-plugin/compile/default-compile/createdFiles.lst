@@ -1,0 +1,8 @@
+com\bos\controller\OrderController.class
+com\bos\controller\InfoController.class
+com\bos\controller\CarController.class
+com\bos\controller\TypeController.class
+com\bos\controller\NewCarController.class
+com\bos\controller\UserController.class
+com\bos\controller\NewInfoController.class
+com\bos\controller\AddressController.class

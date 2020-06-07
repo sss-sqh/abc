@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>货源信息</title>
+		<!--1.引入Vue.js文件-->
+		<script type="text/javascript" src="js/vuejs-2.5.16.js"></script>
+		<!--2.引入axios组件-->
+		<script src="js/axios.min.js"></script>
+		<!--	    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>-->
+
+		<!--3.引入element-UI组件，类似于导入jar包-->
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="css/defaultIndex.css">
+<!--				<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
+
+		<!-- 引入组件库 -->
+		<script src="js/index.js"></script>
+		<!--		<script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
+
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="css/online.css" />	
+		<link rel="stylesheet" href="css/common.css" />
+
+	</head>
+	<body>
+		<div id="app">
+			
+			<!-- 在线下单信息 -->
+			<div class="main">
+				<!--在线下单信息-->
+				<div class="onlineOrder" >
+					<!--<div class="title">
+						货源信息    <span>更多...</span>
+					</div>-->
+					<div class="onlineOrder_main">
+						<form class="el-form" :model="info" ref="ruleForm">
+						<div>
+							<h3>线路信息</h3><br />
+								<div>
+									<div class="el-form-item" style="width: 48%; display: inline-block;">
+										<label class="el-form-item__label" style="width: 80px;">发货地</label>
+										<div class="el-form-item__content" style="margin-left: 80px;">
+											<div class="el-input">
+												<el-select v-model="info.sprovince" placeholder="请选择 省" style="width: 30%">
+													<el-option
+															v-for="item in s_province"
+															:key="item.id"
+															:label="item.addr"
+															:value="item.id">
+													</el-option>
+												</el-select>
+<!--												{{province}}-->
+												<el-select v-model="info.scity" placeholder="请选择 市" style="width: 30%">
+													<el-option
+															v-for="item in s_city"
+															:key="item.id"
+															:label="item.addr"
+															:value="item.id">
+													</el-option>
+												</el-select>
+												<el-select v-model="info.scounty" placeholder="请选择 县" style="width: 30%">
+													<el-option
+															v-for="item in s_county"
+															:key="item.id"
+															:label="item.addr"
+															:value="item.id">
+													</el-option>
+												</el-select>
+<!--												<input type="text" autocomplete="off" class="el-input__inner" -->
+<!--													placeholder="请选择 省" style="width: 30%">-->
+<!--												<input type="text" autocomplete="off" class="el-input__inner"-->
+<!--													   placeholder="请选择 市" style="width: 30%">-->
+<!--												<input type="text" autocomplete="off" class="el-input__inner"-->
+<!--													   placeholder="请选择 县" style="width: 30%">-->
+											</div>
+										</div>
+									</div> 
+									<div class="el-form-item" style="width: 48%; display: inline-block;">
+										<label class="el-form-item__label" style="width: 100px;">街道/门牌号</label>
+										<div class="el-form-item__content" style="margin-left: 100px;">
+											<div class="el-input">
+												<input type="text" v-model="info.source" autocomplete="off" class="el-input__inner"
+													placeholder="详细街道地址（可不填）">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div>
+									<div class="el-form-item" style="width: 48%; display: inline-block;">
+										<label class="el-form-item__label" style="width: 80px;">目的地</label>
+										<div class="el-form-item__content" style="margin-left: 80px;"> 
+											<div class="el-input">
+<!--												<input type="text" autocomplete="off" class="el-input__inner"-->
+<!--													placeholder="请选择 省-市-县">-->
+												<el-select v-model="info.dprovince" placeholder="请选择 省" style="width: 30%">
+													<el-option
+															v-for="item in d_province"
+															:key="item.id"
+															:label="item.addr"
+															:value="item.id">
+													</el-option>
+												</el-select>
+												<el-select v-model="info.dcity" placeholder="请选择 市" style="width: 30%">
+													<el-option
+															v-for="item in d_city"
+															:key="item.id"
+															:label="item.addr"
+															:value="item.id">
+													</el-option>
+												</el-select>
+												<el-select v-model="info.dcounty" placeholder="请选择 县" style="width: 30%">
+													<el-option
+															v-for="item in d_county"
+															:key="item.id"
+															:label="item.addr"
+															:value="item.id">
+													</el-option>
+												</el-select>
+											</div>
+										</div>
+									</div> 
+									<div class="el-form-item" style="width: 48%; display: inline-block;">
+										<label class="el-form-item__label" style="width: 100px;">街道/门牌号</label>
+										<div class="el-form-item__content" style="margin-left: 100px;">
+											<div class="el-input">
+												<input type="text" autocomplete="off" class="el-input__inner"
+													placeholder="详细街道地址（可不填）" v-model="info.destination">
+											</div>
+										</div>
+									</div>
+								</div>
+							
+						</div>
+						<div>
+							<h3>货物信息
+								<span style="float: right; font-size: 14px; width: 40%; font-weight: normal;color: #606266">
+								货物种类：
+								<el-select v-model="info.typeGood1" placeholder="请选择 大种类" style="width: 35%">
+									<el-option
+											v-for="item in type1"
+											:key="item.id"
+											:label="item.name"
+											:value="item.id">
+									</el-option>
+								</el-select>
+								<el-select v-model="info.typeGood2" placeholder="请选择 小种类" style="width: 35%">
+									<el-option
+											v-for="item in type2"
+											:key="item.id"
+											:label="item.name"
+											:value="item.id">
+									</el-option>
+								</el-select>
+							</span></h3>
+
+							<br />
+							<div>
+								<div class="el-form-item" style="width: 21%; display: inline-block;">
+									<label class="el-form-item__label el-col el-col-24 el-col-xs-0" style="width: 80px;">货物名称</label>
+									<div class="el-form-item__content" style="margin-left: 80px;">
+										<div class="el-input">
+											<input type="text" autocomplete="off" class="el-input__inner" 
+												placeholder="货物名称:食品" v-model="info.iname">
+										</div>
+									</div>
+								</div> 
+								<!--分割线-->
+								<div class="el-divider el-divider--vertical"></div>
+								<div class="el-form-item" style="width: 21%; display: inline-block;">
+									<label class="el-form-item__label el-col el-col-24 el-col-xs-0" style="width: 80px;">总件数</label>
+									<div class="el-form-item__content" style="margin-left: 80px;">
+										<div class="el-input">
+											<input type="text" autocomplete="off" class="el-input__inner"
+												placeholder="总件数" style="width: 80%;" v-model="info.icount"> 件
+										</div>
+									</div>
+								</div>
+ 								<!--分割线-->
+								<div class="el-divider el-divider--vertical"></div>
+ 								<div class="el-form-item" style="width: 21%; display: inline-block;">
+									<label class="el-form-item__label el-col el-col-24 el-col-xs-0" style="width: 80px;">预估重量</label>
+									<div class="el-form-item__content" style="margin-left: 80px;">
+										<div class="el-input">
+											<input type="text" autocomplete="off" class="el-input__inner"
+												placeholder="预估重量" style="width: 80%;" v-model="info.iweight"> 吨
+										</div>
+									</div>
+								</div>
+								<!--分割线-->
+								<div class="el-divider el-divider--vertical"></div>
+								<div class="el-form-item" style="width: 27%; display: inline-block;">
+									<label class="el-form-item__label el-col el-col-24 el-col-xs-0" style="width: 80px;">预估体积</label>
+									<div class="el-form-item__content" style="margin-left: 80px;">
+										<div class="el-input">
+											<input type="text" autocomplete="off" class="el-input__inner"
+												placeholder="预估体积" style="width: 80%;" v-model="info.ivolume"> 立方
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--备注信息-->
+							<div>
+								<label class="el-form-item__label" style="width: 80px;">备注</label>
+								<div class="el-form-item__content" style="margin-left: 80px;">
+									<div class="el-textarea">
+										<textarea autocomplete="off" class="el-textarea__inner" style="min-height: 33px;"
+											placeholder="请填写其他需求，如带包装、需冷藏等 不超过30字" v-model="info.iremarks">
+										</textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<h3>联系方式</h3><br />
+							<div>
+								<div class="el-form-item" style="width: 23%; display: inline-block;">
+									<label class="el-form-item__label" style="width: 60px;">发货人</label>
+									<div class="el-form-item__content" style="margin-left: 60px;">
+										<div class="el-input">
+											<input type="text" autocomplete="off" class="el-input__inner" 
+												placeholder="请输入发货人" v-model="info.iuser">
+										</div>
+									</div>
+								</div> 
+								<div class="el-form-item" style="width: 23%; display: inline-block;">
+									<label class="el-form-item__label" style="width: 100px;">发货人手机号</label>
+									<div class="el-form-item__content" style="margin-left: 100px;">
+										<div class="el-input">
+											<input type="text" autocomplete="off" class="el-input__inner"
+												placeholder="" v-model="info.iuserPhone">
+										</div>
+									</div>
+								</div>
+								
+								<!--分割线-->
+								<div class="el-divider el-divider--vertical"></div>
+								
+								<div class="el-form-item" style="width: 23%; display: inline-block;">
+									<label class="el-form-item__label" style="width: 60px;">收货人</label>
+									<div class="el-form-item__content" style="margin-left: 60px;">
+										<div class="el-input">
+											<input type="text" autocomplete="off" class="el-input__inner"
+												placeholder="" v-model="info.ireceiver">
+										</div>
+									</div>
+								</div>
+								<div class="el-form-item" style="width: 23%; display: inline-block;">
+									<label class="el-form-item__label" style="width: 100px;">收货人手机号</label>
+									<div class="el-form-item__content" style="margin-left: 100px;">
+										<div class="el-input">
+											<input type="text" autocomplete="off" class="el-input__inner"
+												placeholder="" v-model="info.ireceiverPhone">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="el-form-item__content" style="margin-left: 80px;">
+							<button type="button" class="el-button el-button--primary" style="width: 48%;" @click="submit()"><span>立即发布</span></button>
+							<button type="button" class="el-button el-button--default" style="width: 48%;" @click="reset('ruleForm')"><span>取消</span></button>
+						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			
+			
+		</div>
+		
+		
+		<!--  Vue中的vm模块  -->
+    	<script type="text/javascript" src="js/vue/onlineOrder.js"></script>
+	</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>恩典用户登录</title>
+		<!--1.引入Vue.js文件-->
+		<script type="text/javascript" src="js/vuejs-2.5.16.js"></script>
+		<!--2.引入axios组件-->
+		<script src="js/axios.min.js"></script>
+		<!--	    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>-->
+
+		<!--3.引入element-UI组件，类似于导入jar包-->
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="css/defaultIndex.css">
+<!--				<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
+
+		<!-- 引入组件库 -->
+		<script src="js/index.js"></script>
+		<!--		<script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
+
+		<link rel="stylesheet" href="css/common.css" />
+	</head>
+	<body>
+		<div id="app">
+				
+			<!-- 响应式的登录页面内容 -->
+			<div class="el-row" style="margin-left: -5px; margin-right: -5px;">
+			    <div class="el-col el-col-24 el-col-xs-0 el-col-sm-8 el-col-md-8 el-col-lg-9 el-col-xl-9" 
+			         style="padding-left: 5px; padding-right: 5px;">
+			      <div><span style="visibility: hidden">左边</span></div>      
+			    </div> 
+			    <div class="el-col el-col-24 el-col-xs-24 el-col-sm-8 el-col-md-8 el-col-lg-6 el-col-xl-6"
+			         style="padding-left: 5px; padding-right: 5px;">
+			       <div>
+			        	<div class="login">
+							<div class="login_title"><h2>恩典用户登录</h2></div>
+							<div class="login_logo">
+								<img src="img/img/user.jpg" width="90px" height="90px"/>
+							</div>
+							<div class="login_main">
+								<el-form ref="ruleForm" :rules="rules" :model="user">
+									<el-form-item prop="username">
+										<el-input placeholder="请输入用户名" v-model="user.username" clearable></el-input>
+									</el-form-item>
+									<el-form-item prop="password">
+										<el-input placeholder="请输入密码" v-model="user.password" show-password></el-input>
+									</el-form-item>
+									<el-form-item>
+										<el-button style="width: 100%;" type="primary" @click="login('ruleForm')">登录</el-button>
+									</el-form-item>
+									<el-row>
+										<span style="float: left;"><a href="register.html">立即注册</a></span>
+										<span style="float: right;"><a href="#">忘记密码</a></span>
+									</el-row>
+								</el-form>
+							</div>
+						</div>
+			       </div>
+			    </div> 
+			    <div class="el-col el-col-24 el-col-xs-0 el-col-sm-8 el-col-md-8 el-col-lg-9 el-col-xl-9"
+			         style="padding-left: 5px; padding-right: 5px;">
+			      <div><span style="visibility: hidden">右边</span></div>      
+			    </div> 
+			</div>
+			
+			
+		</div>	
+		
+		<script type="text/javascript">
+	        new Vue({
+	            el: '#app',
+	            //Vue中的model模块。
+	            data: {
+					user:{
+						username:'',
+						password:'',
+						realname:'',
+						sex:'男',
+						phone:'',
+						pic:'',
+						email:'',
+					},
+					rules:{
+						username: [
+							{ required: true, message: '用户名不能为空', trigger: 'blur' }
+						],
+						password: [
+							{ required: true, message: '密码不能为空', trigger: 'blur' }
+						]
+					}
+				},
+	            methods: {
+					login:function (ruleForm) {
+						var _this = this;
+						this.$refs[ruleForm].validate(function(valid) {
+							if (valid) {
+								//登录
+								axios.post('/bos/user/findOne',_this.user).then(function (response) {
+									if(response.data.res){
+										alert(response.data.message);
+										location.href = "index.html";
+									}else{
+										alert("没有此用户，请先注册哦！");
+										location.href="register.html";
+									}
+								}).catch(function () {
+
+								});
+							} else {
+								alert("请填写必要字段！");
+								return false;
+							}
+						});
+					}
+				},
+	            //异步请求 axios
+	            mounted:function() {}
+	        })
+	    </script>
+	</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>恩典用户注册</title>
+		<!--1.引入Vue.js文件-->
+		<script type="text/javascript" src="js/vuejs-2.5.16.js"></script>
+		<!--2.引入axios组件-->
+		<script src="js/axios.min.js"></script>
+		<!--	    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>-->
+
+		<!--3.引入element-UI组件，类似于导入jar包-->
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="css/defaultIndex.css">
+<!--				<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
+
+		<!-- 引入组件库 -->
+		<script src="js/index.js"></script>
+		<!--		<script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
+
+		<link rel="stylesheet" href="css/common.css" />
+	</head>
+	<body>
+		<div id="app">
+			
+			<!-- 响应式的登录页面内容 -->
+			<div class="el-row" style="margin-left: -5px; margin-right: -5px;">
+			    <div class="el-col el-col-24 el-col-xs-0 el-col-sm-6 el-col-md-6 el-col-lg-7 el-col-xl-7" 
+			         style="padding-left: 5px; padding-right: 5px;">
+			      <div><span style="visibility: hidden">左边</span></div>      
+			    </div> 
+			    <div class="el-col el-col-24 el-col-xs-24 el-col-sm-12 el-col-md-12 el-col-lg-10 el-col-xl-10"
+			         style="padding-left: 5px; padding-right: 5px;">
+			       <div>
+			        	<div class="register">
+							<div class="register_title">
+								<img src="img/img/logoRegister.png" height="45px" style="padding-top: 20px;"/>
+							</div>
+							<div class="register_main">
+								<el-form ref="ruleForm" :rules="rules" :model="user" label-width="100px">
+								  	<el-form-item label="用户名：" prop="username">
+										<el-input v-model="user.username" placeholder="请输入用户名"></el-input>
+									</el-form-item>
+									<el-form-item label="密码：" prop="password">
+									    <el-input type="password" v-model="user.password" autocomplete="off"  placeholder="请输入密码" show-password></el-input>
+									</el-form-item>
+								    <el-form-item label="确认密码：" prop="checkPasswd">
+									    <el-input type="password" v-model="checkPasswd" autocomplete="off" placeholder="请再次输入密码" show-password></el-input>
+									</el-form-item>
+								  	<el-form-item label="性别">
+									    <el-radio-group v-model="user.sex">
+									      <el-radio label="男"></el-radio>
+									      <el-radio label="女"></el-radio>
+									    </el-radio-group>
+									</el-form-item>
+								  	<el-form-item label="邮箱：" prop="email">
+									    <el-input v-model="user.email" placeholder="请输入邮箱"></el-input>
+									</el-form-item>
+									<el-form-item label="真实姓名：" prop="realname">
+										<el-input v-model="user.realname" placeholder="请输入真实姓名"></el-input>
+									</el-form-item>
+								  	<el-form-item label="联系电话：" prop="phone">
+										<el-input v-model="user.phone" placeholder="请输入联系电话"></el-input>
+									</el-form-item>
+								  <el-form-item label="验证码" :rules="[
+										{ required: true, message: '请输入验证码', trigger: 'blur' }
+							    	  ]">
+								    <el-input placeholder="请输入手机验证码" v-model="code" style="width: 48%;"></el-input>
+<!--								    <el-button type="primary" style="width: 48%;" @click="getCode()" id="zphone" >获得验证码</el-button>-->
+									  <button type="button" class="el-button el-button--primary"  style="width: 48%;" @click="getCode()">
+										  <span id="zphone">获得验证码</span>
+									  </button>
+								  </el-form-item>
+								  <el-form-item>
+								    <el-button type="primary" style="width: 40%;" @click="submit('ruleForm')">注册</el-button>
+								    <el-button style="width: 40%;" @click="reset('ruleForm')">重置</el-button>
+								  </el-form-item>
+								  <el-row>
+										<span style="float: left;"><a href="javascript:void(0)">注册即表示您同意平台的规则</a></span>
+										<span style="float: right;"><a href="login.html">如您有账号，可以直接<span style="color: #00786c; font-weight: bold;">登录</span></a></span>
+									</el-row>
+								</el-form>
+							</div>
+						</div>
+			       </div>
+			    </div> 
+			    <div class="el-col el-col-24 el-col-xs-0 el-col-sm-6 el-col-md-6 el-col-lg-7 el-col-xl-7"
+			         style="padding-left: 5px; padding-right: 5px;">
+			      <div><span style="visibility: hidden">右边</span></div>      
+			    </div> 
+			</div>
+		</div>
+		
+		<script type="text/javascript" src="js/vue/register.js"></script>
+	</body>
+</html>

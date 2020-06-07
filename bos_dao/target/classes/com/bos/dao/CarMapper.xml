@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bos.dao.CarMapper" >
+  <resultMap id="BaseResultMap" type="com.bos.pojo.Car" >
+    <id column="cid" property="cid" jdbcType="BIGINT" />
+    <result column="cno" property="cno" jdbcType="VARCHAR" />
+    <result column="ctype" property="ctype" jdbcType="VARCHAR" />
+    <result column="cowner" property="cowner" jdbcType="VARCHAR" />
+    <result column="caddress" property="caddress" jdbcType="VARCHAR" />
+    <result column="cuse_character" property="cuseCharacter" jdbcType="VARCHAR" />
+    <result column="cmodel" property="cmodel" jdbcType="VARCHAR" />
+    <result column="cvin" property="cvin" jdbcType="VARCHAR" />
+    <result column="cengine_no" property="cengineNo" jdbcType="VARCHAR" />
+    <result column="cregister_date" property="cregisterDate" jdbcType="TIMESTAMP" />
+    <result column="cissus_date" property="cissusDate" jdbcType="TIMESTAMP" />
+    <result column="cnum" property="cnum" jdbcType="VARCHAR" />
+    <result column="cweight" property="cweight" jdbcType="INTEGER" />
+    <result column="cpic" property="cpic" jdbcType="VARCHAR" />
+    <result column="cuser" property="cuser" jdbcType="BIGINT" />
+    <result column="cstatus" property="cstatus" jdbcType="INTEGER" />
+    <result column="cenable" property="cenable" jdbcType="INTEGER" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cid, cno, ctype, cowner, caddress, cuse_character, cmodel, cvin, cengine_no, cregister_date, 
+    cissus_date, cnum, cweight, cpic, cuser, cstatus, cenable, created_time, updated_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bos.pojo.CarExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from car
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from car
+    where cid = #{cid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from car
+    where cid = #{cid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bos.pojo.CarExample" >
+    delete from car
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bos.pojo.Car" >
+    insert into car (cid, cno, ctype, 
+      cowner, caddress, cuse_character, 
+      cmodel, cvin, cengine_no, 
+      cregister_date, cissus_date, cnum, 
+      cweight, cpic, cuser, 
+      cstatus, cenable, created_time, 
+      updated_time)
+    values (#{cid,jdbcType=BIGINT}, #{cno,jdbcType=VARCHAR}, #{ctype,jdbcType=VARCHAR}, 
+      #{cowner,jdbcType=VARCHAR}, #{caddress,jdbcType=VARCHAR}, #{cuseCharacter,jdbcType=VARCHAR}, 
+      #{cmodel,jdbcType=VARCHAR}, #{cvin,jdbcType=VARCHAR}, #{cengineNo,jdbcType=VARCHAR}, 
+      #{cregisterDate,jdbcType=TIMESTAMP}, #{cissusDate,jdbcType=TIMESTAMP}, #{cnum,jdbcType=VARCHAR}, 
+      #{cweight,jdbcType=INTEGER}, #{cpic,jdbcType=VARCHAR}, #{cuser,jdbcType=BIGINT}, 
+      #{cstatus,jdbcType=INTEGER}, #{cenable,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{updatedTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bos.pojo.Car" >
+    insert into car
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="cno != null" >
+        cno,
+      </if>
+      <if test="ctype != null" >
+        ctype,
+      </if>
+      <if test="cowner != null" >
+        cowner,
+      </if>
+      <if test="caddress != null" >
+        caddress,
+      </if>
+      <if test="cuseCharacter != null" >
+        cuse_character,
+      </if>
+      <if test="cmodel != null" >
+        cmodel,
+      </if>
+      <if test="cvin != null" >
+        cvin,
+      </if>
+      <if test="cengineNo != null" >
+        cengine_no,
+      </if>
+      <if test="cregisterDate != null" >
+        cregister_date,
+      </if>
+      <if test="cissusDate != null" >
+        cissus_date,
+      </if>
+      <if test="cnum != null" >
+        cnum,
+      </if>
+      <if test="cweight != null" >
+        cweight,
+      </if>
+      <if test="cpic != null" >
+        cpic,
+      </if>
+      <if test="cuser != null" >
+        cuser,
+      </if>
+      <if test="cstatus != null" >
+        cstatus,
+      </if>
+      <if test="cenable != null" >
+        cenable,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+      <if test="updatedTime != null" >
+        updated_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
+        #{cid,jdbcType=BIGINT},
+      </if>
+      <if test="cno != null" >
+        #{cno,jdbcType=VARCHAR},
+      </if>
+      <if test="ctype != null" >
+        #{ctype,jdbcType=VARCHAR},
+      </if>
+      <if test="cowner != null" >
+        #{cowner,jdbcType=VARCHAR},
+      </if>
+      <if test="caddress != null" >
+        #{caddress,jdbcType=VARCHAR},
+      </if>
+      <if test="cuseCharacter != null" >
+        #{cuseCharacter,jdbcType=VARCHAR},
+      </if>
+      <if test="cmodel != null" >
+        #{cmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="cvin != null" >
+        #{cvin,jdbcType=VARCHAR},
+      </if>
+      <if test="cengineNo != null" >
+        #{cengineNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cregisterDate != null" >
+        #{cregisterDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cissusDate != null" >
+        #{cissusDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cnum != null" >
+        #{cnum,jdbcType=VARCHAR},
+      </if>
+      <if test="cweight != null" >
+        #{cweight,jdbcType=INTEGER},
+      </if>
+      <if test="cpic != null" >
+        #{cpic,jdbcType=VARCHAR},
+      </if>
+      <if test="cuser != null" >
+        #{cuser,jdbcType=BIGINT},
+      </if>
+      <if test="cstatus != null" >
+        #{cstatus,jdbcType=INTEGER},
+      </if>
+      <if test="cenable != null" >
+        #{cenable,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null" >
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bos.pojo.CarExample" resultType="java.lang.Integer" >
+    select count(*) from car
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update car
+    <set >
+      <if test="record.cid != null" >
+        cid = #{record.cid,jdbcType=BIGINT},
+      </if>
+      <if test="record.cno != null" >
+        cno = #{record.cno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctype != null" >
+        ctype = #{record.ctype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cowner != null" >
+        cowner = #{record.cowner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.caddress != null" >
+        caddress = #{record.caddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cuseCharacter != null" >
+        cuse_character = #{record.cuseCharacter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cmodel != null" >
+        cmodel = #{record.cmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cvin != null" >
+        cvin = #{record.cvin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cengineNo != null" >
+        cengine_no = #{record.cengineNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cregisterDate != null" >
+        cregister_date = #{record.cregisterDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cissusDate != null" >
+        cissus_date = #{record.cissusDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cnum != null" >
+        cnum = #{record.cnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cweight != null" >
+        cweight = #{record.cweight,jdbcType=INTEGER},
+      </if>
+      <if test="record.cpic != null" >
+        cpic = #{record.cpic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cuser != null" >
+        cuser = #{record.cuser,jdbcType=BIGINT},
+      </if>
+      <if test="record.cstatus != null" >
+        cstatus = #{record.cstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.cenable != null" >
+        cenable = #{record.cenable,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdTime != null" >
+        created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedTime != null" >
+        updated_time = #{record.updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update car
+    set cid = #{record.cid,jdbcType=BIGINT},
+      cno = #{record.cno,jdbcType=VARCHAR},
+      ctype = #{record.ctype,jdbcType=VARCHAR},
+      cowner = #{record.cowner,jdbcType=VARCHAR},
+      caddress = #{record.caddress,jdbcType=VARCHAR},
+      cuse_character = #{record.cuseCharacter,jdbcType=VARCHAR},
+      cmodel = #{record.cmodel,jdbcType=VARCHAR},
+      cvin = #{record.cvin,jdbcType=VARCHAR},
+      cengine_no = #{record.cengineNo,jdbcType=VARCHAR},
+      cregister_date = #{record.cregisterDate,jdbcType=TIMESTAMP},
+      cissus_date = #{record.cissusDate,jdbcType=TIMESTAMP},
+      cnum = #{record.cnum,jdbcType=VARCHAR},
+      cweight = #{record.cweight,jdbcType=INTEGER},
+      cpic = #{record.cpic,jdbcType=VARCHAR},
+      cuser = #{record.cuser,jdbcType=BIGINT},
+      cstatus = #{record.cstatus,jdbcType=INTEGER},
+      cenable = #{record.cenable,jdbcType=INTEGER},
+      created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+      updated_time = #{record.updatedTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bos.pojo.Car" >
+    update car
+    <set >
+      <if test="cno != null" >
+        cno = #{cno,jdbcType=VARCHAR},
+      </if>
+      <if test="ctype != null" >
+        ctype = #{ctype,jdbcType=VARCHAR},
+      </if>
+      <if test="cowner != null" >
+        cowner = #{cowner,jdbcType=VARCHAR},
+      </if>
+      <if test="caddress != null" >
+        caddress = #{caddress,jdbcType=VARCHAR},
+      </if>
+      <if test="cuseCharacter != null" >
+        cuse_character = #{cuseCharacter,jdbcType=VARCHAR},
+      </if>
+      <if test="cmodel != null" >
+        cmodel = #{cmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="cvin != null" >
+        cvin = #{cvin,jdbcType=VARCHAR},
+      </if>
+      <if test="cengineNo != null" >
+        cengine_no = #{cengineNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cregisterDate != null" >
+        cregister_date = #{cregisterDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cissusDate != null" >
+        cissus_date = #{cissusDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cnum != null" >
+        cnum = #{cnum,jdbcType=VARCHAR},
+      </if>
+      <if test="cweight != null" >
+        cweight = #{cweight,jdbcType=INTEGER},
+      </if>
+      <if test="cpic != null" >
+        cpic = #{cpic,jdbcType=VARCHAR},
+      </if>
+      <if test="cuser != null" >
+        cuser = #{cuser,jdbcType=BIGINT},
+      </if>
+      <if test="cstatus != null" >
+        cstatus = #{cstatus,jdbcType=INTEGER},
+      </if>
+      <if test="cenable != null" >
+        cenable = #{cenable,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null" >
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where cid = #{cid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bos.pojo.Car" >
+    update car
+    set cno = #{cno,jdbcType=VARCHAR},
+      ctype = #{ctype,jdbcType=VARCHAR},
+      cowner = #{cowner,jdbcType=VARCHAR},
+      caddress = #{caddress,jdbcType=VARCHAR},
+      cuse_character = #{cuseCharacter,jdbcType=VARCHAR},
+      cmodel = #{cmodel,jdbcType=VARCHAR},
+      cvin = #{cvin,jdbcType=VARCHAR},
+      cengine_no = #{cengineNo,jdbcType=VARCHAR},
+      cregister_date = #{cregisterDate,jdbcType=TIMESTAMP},
+      cissus_date = #{cissusDate,jdbcType=TIMESTAMP},
+      cnum = #{cnum,jdbcType=VARCHAR},
+      cweight = #{cweight,jdbcType=INTEGER},
+      cpic = #{cpic,jdbcType=VARCHAR},
+      cuser = #{cuser,jdbcType=BIGINT},
+      cstatus = #{cstatus,jdbcType=INTEGER},
+      cenable = #{cenable,jdbcType=INTEGER},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+    where cid = #{cid,jdbcType=BIGINT}
+  </update>
+</mapper>

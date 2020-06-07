@@ -1,0 +1,16 @@
+com\bos\service\CarService.class
+com\bos\service\InfoService.class
+com\bos\service\impl\OrderServiceImpl.class
+com\bos\service\impl\AddressServiceImpl.class
+com\bos\service\impl\NewInfoServiceImpl.class
+com\bos\service\impl\CarServiceImpl.class
+com\bos\service\impl\UserServiceImpl.class
+com\bos\service\AddressService.class
+com\bos\service\impl\InfoServiceImpl.class
+com\bos\service\NewCarService.class
+com\bos\service\OrderService.class
+com\bos\service\UserService.class
+com\bos\service\impl\TypeServiceImpl.class
+com\bos\service\impl\NewCarServiceImpl.class
+com\bos\service\NewInfoService.class
+com\bos\service\TypeService.class

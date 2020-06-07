@@ -1,0 +1,185 @@
+*{
+	padding: 0;
+	margin: 0 auto;
+}
+body{
+	background-color: #EBEEF5;
+}
+.bgcol{
+	background-color: #EBEEF5;
+}
+.main{
+	/*margin: 0 20px;*/
+	/*background-color: white;*/
+	/*height: 540px;*/
+	/*背景渐变色*/
+	background:linear-gradient(rgba(0,150,136,0.4), rgba(235,238,245,1));
+	background-blend-mode: darken;
+	height: 540px;
+	background-size: 100%;
+	background-position: 50% 50%;
+}
+.login{
+	margin-top: 80px;
+	background-color: white;
+	/*在没有用到相应式页面的时候用的固定宽度*/
+	/*width: 300px;*/
+	height: 400px;
+	text-align: center;
+	box-shadow: 5px 5px 3px #E4E7ED;
+}
+.login_title{
+	color: #009688;
+	height: 20px;
+	padding-top: 15px;
+}
+.login_logo{
+	/*在没有用到相应式页面的时候用的固定宽度*/
+	/*width: 260px;*/
+	padding-top: 20px;
+	height: 110px;
+}
+.login_main{
+	/*在没有用到相应式页面的时候用的固定宽度*/
+	/*width: 260px;*/
+	/*响应式页面用到的*/
+	padding:20px;
+	padding-top: 0px;
+	height: 270px;
+}
+.el-input.is-active .el-input__inner, .el-input__inner:focus {
+    border-color: #009688;
+    outline: 0;
+}
+
+.el-button--primary {
+    color: #FFF;
+    background-color: #009688;
+    border-color: #009688;
+}
+.el-button--primary:focus, .el-button--primary:hover {
+    background: #32ab9f;
+    border-color: #32ab9f;
+    /*color: #FFFFFF;*/
+}
+a{
+	color: #C0C4CC;
+	font-size: 14px;
+	text-decoration: none;
+}
+a:hover{
+	color: #009688;
+}
+
+.el-button:focus, .el-button:hover {
+    color: #009688;
+    border-color: #b2dfdb;
+    background-color: #e5f4f3;
+}
+.el-button:active {
+    color: #009688;
+    border-color: #009688;
+    outline: 0;
+}
+.el-radio__inner:hover {
+    border-color: #009688;
+}
+.el-radio__input.is-checked .el-radio__inner {
+    border-color: #009688;
+    background: #009688;
+}
+.el-radio__input.is-checked+.el-radio__label {
+    color: #009688;
+}
+.register{
+	margin: 50px auto;
+	/*在没有用到相应式页面的时候用的固定宽度*/
+	/*width: 500px;*/
+	background-color: white;
+}
+.register_main{
+	/*margin:80px auto;*/
+	/*padding: 40px 20px;*/
+	/*padding-top: 80px;*/
+	padding-bottom: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.register_title{
+	height: 80px;
+	text-align: center;
+	line-height: 80px;
+	color: #009688;
+	
+}
+.el-menu-item i {
+    color: #ffffff;
+}
+.el-submenu__title i {
+    color: #009688;
+}
+.el-table .warning-row {
+    background: oldlace;
+  }
+
+.el-table .success-row {
+    background: #f0f9eb;
+  }
+.el-pagination__jump {
+    margin-left: 24px;
+    font-weight: 400;
+    color: #606266;
+    float: right;
+}
+
+.el-pagination.is-background .el-pager li:not(.disabled):hover {
+    color: #009688;
+}
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+    background-color: #009688;
+    color: #FFF;
+}
+.el-button--mini, .el-button--mini.is-round {
+    padding: 4px 7px;
+}
+.el-textarea__inner:focus {
+    outline: 0;
+    border-color: #009688;
+}
+/*分割线样式*/
+.el-divider--vertical {
+    display: inline-block;
+    width: 1px;
+    height: 45px;
+    margin: 0 8px;
+    vertical-align: middle;
+    position: relative;
+}
+/*下拉框的样式*/
+.el-select .el-input.is-focus .el-input__inner {
+    border-color: #009688;
+}
+/*下拉框选中的样式*/
+.el-select-dropdown__item.selected {
+    color: #009688;
+    font-weight: 700;
+}
+/*下拉框选中之后的样式*/
+.el-select .el-input__inner:focus {
+    border-color: #009688;
+}
+
+/*不知道怎么回事,不管用*/
+/*@media screen and (max-width: 769px) {
+    .el-pagination__jump {
+	   display: none;
+	}
+}*/
+/*input{
+	border: 1px #DCDFE6 solid;
+	border-radius: 5px;
+	width: 240px;
+	height: 36px;
+	margin: 10px;
+}*/
+

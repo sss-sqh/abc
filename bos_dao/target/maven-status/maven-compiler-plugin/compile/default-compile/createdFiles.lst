@@ -1,0 +1,6 @@
+com\bos\dao\InfoMapper.class
+com\bos\dao\OrdersMapper.class
+com\bos\dao\CarMapper.class
+com\bos\dao\UserMapper.class
+com\bos\dao\AddressMapper.class
+com\bos\dao\TypeMapper.class

@@ -1,0 +1,72 @@
+span{
+	float: left; 
+	color: #009688;
+	line-height: 60px; 
+	font-size: 18px; 
+	font-weight: bold;
+	padding: 0 20px;
+	text-align: center;
+}
+i{
+	padding-right: 25px;
+}
+.right{
+	padding: 0 10px;
+}
+li{
+	text-align: center;
+}
+body {
+    padding-top: 0px;
+}
+
+.title{
+	font-size: 24px;
+	line-height: 60px;
+}
+.title>span {
+	float: right;
+	color: #ffffff;
+}
+.info{
+	padding: 0 20px;
+}
+.car{
+ 	padding: 0 20px;
+}
+.footer{
+	height: 60px;
+	text-align: center;
+	line-height: 60px;
+	color: #909399;
+	border-top: 1px solid #e6e6e6;
+    /*background-color: rgb(84, 92, 100);*/
+}
+.btn>span{
+	color: white;
+    line-height: 25px;
+    font-size: 10px;
+    width: 38px;
+    padding: 0 5px;
+    text-align: center;
+}
+.btn>span:hover{
+	color: #009688;
+}
+
+/*在线下单的样式*/
+/*主要的内容与其他部分的外边距  上下为0 左右为20px*/
+.onlineOrder_main{
+	margin: 0 20px;
+}
+h3{
+	padding-top: 15px;
+}
+
+/*个人信息页面样式  没有引用*/
+.personal{
+	margin: 0 20px;
+}
+
+
+

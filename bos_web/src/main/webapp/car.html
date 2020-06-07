@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>车辆信息</title>
+		<!--1.引入Vue.js文件-->
+	    <script type="text/javascript" src="js/vuejs-2.5.16.js"></script>
+	    <!--2.引入axios组件-->
+		<script src="js/axios.min.js"></script>
+	    <!--<script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>-->
+	    <!--3.引入element-UI组件，类似于导入jar包-->
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="css/defaultIndex.css">
+<!--		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
+		<!-- 引入组件库 -->
+		<script src="js/index.js"></script>
+<!--		<script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
+
+		<!-- 引入自定义样式 -->
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/display.css" />
+<!--		<link rel="stylesheet" href="css/index.css" />-->
+		<style type="text/css">
+			.title{
+				height: 60px;
+				font-size: 24px;
+				/*line-height: 60px;*/
+			}
+			.title>span{
+				line-height: 60px;
+			}
+			.car{
+				margin: 0 20px;
+			}
+			.el-form-item {
+				height: 50px;
+				padding-top: 10px;
+				margin-bottom: 0px;
+			}
+			.el-form-item__content{
+				width: 140px;
+			}
+			.el-form.demo-form-inline.el-form--inline{
+				height: 60px;
+			}
+			.dialog span{
+				display: inline-block;
+				width:40%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app" v-cloak>
+
+			<!-- 弹窗：车源详情信息 -->
+			<div>
+				<el-dialog title="车源详情信息" :visible.sync="dialogFormVisible">
+					<div class="dialog">
+						<div>
+							<span>日期 : {{seeNewCar.car.createdTime}}</span>    <span>车辆类型 : {{seeNewCar.car.ctype}}</span>
+						</div>
+						<div>
+							<span>车牌号 : {{seeNewCar.car.cno}}</span>     <span>核定载重 : {{seeNewCar.car.iname}}</span>
+						</div>
+						<div>
+							<span>车辆联系人 : {{seeNewCar.carUser.realname}}</span>   <span>车联联系人电话 : {{seeNewCar.carUser.phone}}</span>
+						</div>
+					</div>
+					<div slot="footer" class="dialog-footer">
+						<el-button @click="dialogFormVisible = false">取 消</el-button>
+						<el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+					</div>
+				</el-dialog>
+			</div>
+
+			<!-- 货源信息 和车辆信息 -->
+			<div class="main">
+				
+				<!--车辆信息-->
+				<div class="car">
+					<div class="title">
+						<span>
+							车源信息
+						</span>
+						<div style="float: right;">
+<!--							<span style="font-size: 14px; font-weight: normal;">核定载重(吨)：</span>-->
+							<el-form :inline="true" :model="search" class="demo-form-inline" style="margin-right: -75px" >
+								<el-form-item label="核定载重(吨)：">
+									<el-input v-model="search.search_cweight" placeholder="核定载重"></el-input>
+								</el-form-item>
+
+								<el-form-item>
+									<el-button type="primary" @click="onSubmit">查询</el-button>
+								</el-form-item>
+
+							</el-form>
+						</div>
+					</div>
+					<div class="car_main">
+						<el-table
+						    :data="list"
+						    height="420"
+						    style="width: 100%"
+							v-loading="loading"
+						    :row-class-name="tableRowClassName">
+                            <el-table-column
+                                prop="car.createdTime"
+                                label="加入时间">
+                            </el-table-column>
+						    <el-table-column
+						      prop="car.cno"
+						      label="车牌号">
+						    </el-table-column>
+						    <el-table-column
+						      prop="car.ctype"
+						      label="车辆类型">
+						    </el-table-column>
+						    <el-table-column
+						      prop="car.cweight"
+						      label="核定载重(吨)">
+						    </el-table-column>
+							<el-table-column
+								prop="carUser.realname"
+								label="车辆联系人">
+							</el-table-column>
+<!--							<el-table-column-->
+<!--									prop="user.phone"-->
+<!--									label="车辆联系人联系方式">-->
+<!--							</el-table-column>-->
+							<el-table-column
+						      fixed="right"
+						      label="操作"
+						      width="120">
+						      <template slot-scope="scope">
+						        <el-button type="primary" size="mini" class="btn" @click="see(scope.row)">查看</el-button>
+						      </template>
+						    </el-table-column>
+						</el-table>
+						
+					</div>
+					<!-- 分页信息 -->
+					<div>
+						<div style="text-align: center;">
+							<el-pagination
+									background
+									layout="prev, pager, next,jumper"
+									:total="totalRecord"
+									:page-size="pageSize"
+									:current-page="currentNum"
+									@current-change="changeNum">
+							</el-pagination>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		
+		
+		<!--  Vue中的vm模块  -->
+    	<script type="text/javascript" src="js/vue/car.js"></script>
+	</body>
+</html>

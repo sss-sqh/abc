@@ -1,0 +1,9 @@
+/*在线下单的样式*/
+/*主要的内容与其他部分的外边距  上下为0 左右为20px*/
+.onlineOrder_main{
+	margin: 0 20px;
+}
+h3{
+	padding-top: 15px;
+}
+

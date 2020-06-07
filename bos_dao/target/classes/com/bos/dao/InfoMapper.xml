@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bos.dao.InfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bos.pojo.Info" >
+    <id column="iid" property="iid" jdbcType="BIGINT" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="destination" property="destination" jdbcType="VARCHAR" />
+    <result column="iname" property="iname" jdbcType="VARCHAR" />
+    <result column="iweight" property="iweight" jdbcType="BIGINT" />
+    <result column="ivolume" property="ivolume" jdbcType="BIGINT" />
+    <result column="iuser_id" property="iuserId" jdbcType="BIGINT" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
+    <result column="type_good1" property="typeGood1" jdbcType="BIGINT" />
+    <result column="idriver" property="idriver" jdbcType="BIGINT" />
+    <result column="icar" property="icar" jdbcType="BIGINT" />
+    <result column="icount" property="icount" jdbcType="BIGINT" />
+    <result column="iremarks" property="iremarks" jdbcType="VARCHAR" />
+    <result column="ireceiver" property="ireceiver" jdbcType="VARCHAR" />
+    <result column="ireceiver_phone" property="ireceiverPhone" jdbcType="VARCHAR" />
+    <result column="icost" property="icost" jdbcType="VARCHAR" />
+    <result column="sprovince" property="sprovince" jdbcType="BIGINT" />
+    <result column="scity" property="scity" jdbcType="BIGINT" />
+    <result column="scounty" property="scounty" jdbcType="BIGINT" />
+    <result column="dprovince" property="dprovince" jdbcType="BIGINT" />
+    <result column="dcity" property="dcity" jdbcType="BIGINT" />
+    <result column="dcounty" property="dcounty" jdbcType="BIGINT" />
+    <result column="iuser_phone" property="iuserPhone" jdbcType="VARCHAR" />
+    <result column="iuser" property="iuser" jdbcType="VARCHAR" />
+    <result column="type_good2" property="typeGood2" jdbcType="BIGINT" />
+    <result column="istatus" property="istatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    iid, source, destination, iname, iweight, ivolume, iuser_id, created_time, updated_time, 
+    type_good1, idriver, icar, icount, iremarks, ireceiver, ireceiver_phone, icost, sprovince, 
+    scity, scounty, dprovince, dcity, dcounty, iuser_phone, iuser, type_good2, istatus
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bos.pojo.InfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from info
+    where iid = #{iid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from info
+    where iid = #{iid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bos.pojo.InfoExample" >
+    delete from info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bos.pojo.Info" >
+    insert into info (iid, source, destination, 
+      iname, iweight, ivolume, 
+      iuser_id, created_time, updated_time, 
+      type_good1, idriver, icar, 
+      icount, iremarks, ireceiver, 
+      ireceiver_phone, icost, sprovince, 
+      scity, scounty, dprovince, 
+      dcity, dcounty, iuser_phone, 
+      iuser, type_good2, istatus
+      )
+    values (#{iid,jdbcType=BIGINT}, #{source,jdbcType=VARCHAR}, #{destination,jdbcType=VARCHAR}, 
+      #{iname,jdbcType=VARCHAR}, #{iweight,jdbcType=BIGINT}, #{ivolume,jdbcType=BIGINT}, 
+      #{iuserId,jdbcType=BIGINT}, #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP}, 
+      #{typeGood1,jdbcType=BIGINT}, #{idriver,jdbcType=BIGINT}, #{icar,jdbcType=BIGINT}, 
+      #{icount,jdbcType=BIGINT}, #{iremarks,jdbcType=VARCHAR}, #{ireceiver,jdbcType=VARCHAR}, 
+      #{ireceiverPhone,jdbcType=VARCHAR}, #{icost,jdbcType=VARCHAR}, #{sprovince,jdbcType=BIGINT}, 
+      #{scity,jdbcType=BIGINT}, #{scounty,jdbcType=BIGINT}, #{dprovince,jdbcType=BIGINT}, 
+      #{dcity,jdbcType=BIGINT}, #{dcounty,jdbcType=BIGINT}, #{iuserPhone,jdbcType=VARCHAR}, 
+      #{iuser,jdbcType=VARCHAR}, #{typeGood2,jdbcType=BIGINT}, #{istatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bos.pojo.Info" >
+    insert into info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iid != null" >
+        iid,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="destination != null" >
+        destination,
+      </if>
+      <if test="iname != null" >
+        iname,
+      </if>
+      <if test="iweight != null" >
+        iweight,
+      </if>
+      <if test="ivolume != null" >
+        ivolume,
+      </if>
+      <if test="iuserId != null" >
+        iuser_id,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+      <if test="updatedTime != null" >
+        updated_time,
+      </if>
+      <if test="typeGood1 != null" >
+        type_good1,
+      </if>
+      <if test="idriver != null" >
+        idriver,
+      </if>
+      <if test="icar != null" >
+        icar,
+      </if>
+      <if test="icount != null" >
+        icount,
+      </if>
+      <if test="iremarks != null" >
+        iremarks,
+      </if>
+      <if test="ireceiver != null" >
+        ireceiver,
+      </if>
+      <if test="ireceiverPhone != null" >
+        ireceiver_phone,
+      </if>
+      <if test="icost != null" >
+        icost,
+      </if>
+      <if test="sprovince != null" >
+        sprovince,
+      </if>
+      <if test="scity != null" >
+        scity,
+      </if>
+      <if test="scounty != null" >
+        scounty,
+      </if>
+      <if test="dprovince != null" >
+        dprovince,
+      </if>
+      <if test="dcity != null" >
+        dcity,
+      </if>
+      <if test="dcounty != null" >
+        dcounty,
+      </if>
+      <if test="iuserPhone != null" >
+        iuser_phone,
+      </if>
+      <if test="iuser != null" >
+        iuser,
+      </if>
+      <if test="typeGood2 != null" >
+        type_good2,
+      </if>
+      <if test="istatus != null" >
+        istatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iid != null" >
+        #{iid,jdbcType=BIGINT},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null" >
+        #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="iname != null" >
+        #{iname,jdbcType=VARCHAR},
+      </if>
+      <if test="iweight != null" >
+        #{iweight,jdbcType=BIGINT},
+      </if>
+      <if test="ivolume != null" >
+        #{ivolume,jdbcType=BIGINT},
+      </if>
+      <if test="iuserId != null" >
+        #{iuserId,jdbcType=BIGINT},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null" >
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typeGood1 != null" >
+        #{typeGood1,jdbcType=BIGINT},
+      </if>
+      <if test="idriver != null" >
+        #{idriver,jdbcType=BIGINT},
+      </if>
+      <if test="icar != null" >
+        #{icar,jdbcType=BIGINT},
+      </if>
+      <if test="icount != null" >
+        #{icount,jdbcType=BIGINT},
+      </if>
+      <if test="iremarks != null" >
+        #{iremarks,jdbcType=VARCHAR},
+      </if>
+      <if test="ireceiver != null" >
+        #{ireceiver,jdbcType=VARCHAR},
+      </if>
+      <if test="ireceiverPhone != null" >
+        #{ireceiverPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="icost != null" >
+        #{icost,jdbcType=VARCHAR},
+      </if>
+      <if test="sprovince != null" >
+        #{sprovince,jdbcType=BIGINT},
+      </if>
+      <if test="scity != null" >
+        #{scity,jdbcType=BIGINT},
+      </if>
+      <if test="scounty != null" >
+        #{scounty,jdbcType=BIGINT},
+      </if>
+      <if test="dprovince != null" >
+        #{dprovince,jdbcType=BIGINT},
+      </if>
+      <if test="dcity != null" >
+        #{dcity,jdbcType=BIGINT},
+      </if>
+      <if test="dcounty != null" >
+        #{dcounty,jdbcType=BIGINT},
+      </if>
+      <if test="iuserPhone != null" >
+        #{iuserPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="iuser != null" >
+        #{iuser,jdbcType=VARCHAR},
+      </if>
+      <if test="typeGood2 != null" >
+        #{typeGood2,jdbcType=BIGINT},
+      </if>
+      <if test="istatus != null" >
+        #{istatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bos.pojo.InfoExample" resultType="java.lang.Integer" >
+    select count(*) from info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update info
+    <set >
+      <if test="record.iid != null" >
+        iid = #{record.iid,jdbcType=BIGINT},
+      </if>
+      <if test="record.source != null" >
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.destination != null" >
+        destination = #{record.destination,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iname != null" >
+        iname = #{record.iname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iweight != null" >
+        iweight = #{record.iweight,jdbcType=BIGINT},
+      </if>
+      <if test="record.ivolume != null" >
+        ivolume = #{record.ivolume,jdbcType=BIGINT},
+      </if>
+      <if test="record.iuserId != null" >
+        iuser_id = #{record.iuserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createdTime != null" >
+        created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedTime != null" >
+        updated_time = #{record.updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.typeGood1 != null" >
+        type_good1 = #{record.typeGood1,jdbcType=BIGINT},
+      </if>
+      <if test="record.idriver != null" >
+        idriver = #{record.idriver,jdbcType=BIGINT},
+      </if>
+      <if test="record.icar != null" >
+        icar = #{record.icar,jdbcType=BIGINT},
+      </if>
+      <if test="record.icount != null" >
+        icount = #{record.icount,jdbcType=BIGINT},
+      </if>
+      <if test="record.iremarks != null" >
+        iremarks = #{record.iremarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ireceiver != null" >
+        ireceiver = #{record.ireceiver,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ireceiverPhone != null" >
+        ireceiver_phone = #{record.ireceiverPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.icost != null" >
+        icost = #{record.icost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sprovince != null" >
+        sprovince = #{record.sprovince,jdbcType=BIGINT},
+      </if>
+      <if test="record.scity != null" >
+        scity = #{record.scity,jdbcType=BIGINT},
+      </if>
+      <if test="record.scounty != null" >
+        scounty = #{record.scounty,jdbcType=BIGINT},
+      </if>
+      <if test="record.dprovince != null" >
+        dprovince = #{record.dprovince,jdbcType=BIGINT},
+      </if>
+      <if test="record.dcity != null" >
+        dcity = #{record.dcity,jdbcType=BIGINT},
+      </if>
+      <if test="record.dcounty != null" >
+        dcounty = #{record.dcounty,jdbcType=BIGINT},
+      </if>
+      <if test="record.iuserPhone != null" >
+        iuser_phone = #{record.iuserPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iuser != null" >
+        iuser = #{record.iuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeGood2 != null" >
+        type_good2 = #{record.typeGood2,jdbcType=BIGINT},
+      </if>
+      <if test="record.istatus != null" >
+        istatus = #{record.istatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update info
+    set iid = #{record.iid,jdbcType=BIGINT},
+      source = #{record.source,jdbcType=VARCHAR},
+      destination = #{record.destination,jdbcType=VARCHAR},
+      iname = #{record.iname,jdbcType=VARCHAR},
+      iweight = #{record.iweight,jdbcType=BIGINT},
+      ivolume = #{record.ivolume,jdbcType=BIGINT},
+      iuser_id = #{record.iuserId,jdbcType=BIGINT},
+      created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+      updated_time = #{record.updatedTime,jdbcType=TIMESTAMP},
+      type_good1 = #{record.typeGood1,jdbcType=BIGINT},
+      idriver = #{record.idriver,jdbcType=BIGINT},
+      icar = #{record.icar,jdbcType=BIGINT},
+      icount = #{record.icount,jdbcType=BIGINT},
+      iremarks = #{record.iremarks,jdbcType=VARCHAR},
+      ireceiver = #{record.ireceiver,jdbcType=VARCHAR},
+      ireceiver_phone = #{record.ireceiverPhone,jdbcType=VARCHAR},
+      icost = #{record.icost,jdbcType=VARCHAR},
+      sprovince = #{record.sprovince,jdbcType=BIGINT},
+      scity = #{record.scity,jdbcType=BIGINT},
+      scounty = #{record.scounty,jdbcType=BIGINT},
+      dprovince = #{record.dprovince,jdbcType=BIGINT},
+      dcity = #{record.dcity,jdbcType=BIGINT},
+      dcounty = #{record.dcounty,jdbcType=BIGINT},
+      iuser_phone = #{record.iuserPhone,jdbcType=VARCHAR},
+      iuser = #{record.iuser,jdbcType=VARCHAR},
+      type_good2 = #{record.typeGood2,jdbcType=BIGINT},
+      istatus = #{record.istatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bos.pojo.Info" >
+    update info
+    <set >
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null" >
+        destination = #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="iname != null" >
+        iname = #{iname,jdbcType=VARCHAR},
+      </if>
+      <if test="iweight != null" >
+        iweight = #{iweight,jdbcType=BIGINT},
+      </if>
+      <if test="ivolume != null" >
+        ivolume = #{ivolume,jdbcType=BIGINT},
+      </if>
+      <if test="iuserId != null" >
+        iuser_id = #{iuserId,jdbcType=BIGINT},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null" >
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typeGood1 != null" >
+        type_good1 = #{typeGood1,jdbcType=BIGINT},
+      </if>
+      <if test="idriver != null" >
+        idriver = #{idriver,jdbcType=BIGINT},
+      </if>
+      <if test="icar != null" >
+        icar = #{icar,jdbcType=BIGINT},
+      </if>
+      <if test="icount != null" >
+        icount = #{icount,jdbcType=BIGINT},
+      </if>
+      <if test="iremarks != null" >
+        iremarks = #{iremarks,jdbcType=VARCHAR},
+      </if>
+      <if test="ireceiver != null" >
+        ireceiver = #{ireceiver,jdbcType=VARCHAR},
+      </if>
+      <if test="ireceiverPhone != null" >
+        ireceiver_phone = #{ireceiverPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="icost != null" >
+        icost = #{icost,jdbcType=VARCHAR},
+      </if>
+      <if test="sprovince != null" >
+        sprovince = #{sprovince,jdbcType=BIGINT},
+      </if>
+      <if test="scity != null" >
+        scity = #{scity,jdbcType=BIGINT},
+      </if>
+      <if test="scounty != null" >
+        scounty = #{scounty,jdbcType=BIGINT},
+      </if>
+      <if test="dprovince != null" >
+        dprovince = #{dprovince,jdbcType=BIGINT},
+      </if>
+      <if test="dcity != null" >
+        dcity = #{dcity,jdbcType=BIGINT},
+      </if>
+      <if test="dcounty != null" >
+        dcounty = #{dcounty,jdbcType=BIGINT},
+      </if>
+      <if test="iuserPhone != null" >
+        iuser_phone = #{iuserPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="iuser != null" >
+        iuser = #{iuser,jdbcType=VARCHAR},
+      </if>
+      <if test="typeGood2 != null" >
+        type_good2 = #{typeGood2,jdbcType=BIGINT},
+      </if>
+      <if test="istatus != null" >
+        istatus = #{istatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where iid = #{iid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bos.pojo.Info" >
+    update info
+    set source = #{source,jdbcType=VARCHAR},
+      destination = #{destination,jdbcType=VARCHAR},
+      iname = #{iname,jdbcType=VARCHAR},
+      iweight = #{iweight,jdbcType=BIGINT},
+      ivolume = #{ivolume,jdbcType=BIGINT},
+      iuser_id = #{iuserId,jdbcType=BIGINT},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      type_good1 = #{typeGood1,jdbcType=BIGINT},
+      idriver = #{idriver,jdbcType=BIGINT},
+      icar = #{icar,jdbcType=BIGINT},
+      icount = #{icount,jdbcType=BIGINT},
+      iremarks = #{iremarks,jdbcType=VARCHAR},
+      ireceiver = #{ireceiver,jdbcType=VARCHAR},
+      ireceiver_phone = #{ireceiverPhone,jdbcType=VARCHAR},
+      icost = #{icost,jdbcType=VARCHAR},
+      sprovince = #{sprovince,jdbcType=BIGINT},
+      scity = #{scity,jdbcType=BIGINT},
+      scounty = #{scounty,jdbcType=BIGINT},
+      dprovince = #{dprovince,jdbcType=BIGINT},
+      dcity = #{dcity,jdbcType=BIGINT},
+      dcounty = #{dcounty,jdbcType=BIGINT},
+      iuser_phone = #{iuserPhone,jdbcType=VARCHAR},
+      iuser = #{iuser,jdbcType=VARCHAR},
+      type_good2 = #{typeGood2,jdbcType=BIGINT},
+      istatus = #{istatus,jdbcType=INTEGER}
+    where iid = #{iid,jdbcType=BIGINT}
+  </update>
+</mapper>

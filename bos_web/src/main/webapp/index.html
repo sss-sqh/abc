@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<!--1.引入Vue.js文件-->
+	    <script type="text/javascript" src="js/vuejs-2.5.16.js"></script>
+	    <!--2.引入axios组件-->
+		<script src="js/axios.min.js"></script>
+<!--	    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>-->
+
+	    <!--3.引入element-UI组件，类似于导入jar包-->
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="css/defaultIndex.css">
+<!--		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
+
+		<!-- 引入组件库 -->
+		<script src="js/index.js"></script>
+<!--		<script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
+
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/index.css" />
+		<link rel="stylesheet" href="css/display.css" />
+	</head>
+	<body>
+		<div id="app" v-cloak>
+			
+			<!-- 响应式导航栏 -->
+			<div>
+				<div class="el-row" style="margin-left: -5px; margin-right: -5px;">
+					<el-menu
+					  class="el-menu-demo"
+					  mode="horizontal"
+					  @select="handleSelect"
+					  active-text-color="#009688">
+					  <span class="el-col el-col-24 el-col-xs-22 el-col-sm-6 el-col-md-6 el-col-lg-3 el-col-xl-3">
+					  	<!--<img src="img/img/logoOnly.png" height="38px"/>-->
+					  	恩典配货系统
+					  </span>
+					  <el-menu-item index="1"
+					  	class="el-col el-col-24 el-col-xs-0 el-col-sm-3 el-col-md-3 el-col-lg-2 el-col-xl-2">
+					  	<a href="info.html" target="iframe">货源信息</a>
+					  </el-menu-item>
+					  <el-menu-item index="2"
+					  	class="el-col el-col-24 el-col-xs-0 el-col-sm-3 el-col-md-3 el-col-lg-2 el-col-xl-2">
+					  	<a href="car.html" target="iframe">车源信息</a>
+					  </el-menu-item>
+					  <el-menu-item index="8"
+					  	class="el-col el-col-24 el-col-xs-0 el-col-sm-3 el-col-md-3 el-col-lg-2 el-col-xl-2">
+					  	<a href="onlineOrder.html" target="iframe">在线发布</a>
+					  </el-menu-item>
+					  <el-menu-item index="3"
+					  	class="el-col el-col-24 el-col-xs-0 el-col-sm-3 el-col-md-3 el-col-lg-2 el-col-xl-2">
+						  <a href="index.html" target="_self">运单查询</a>
+					  </el-menu-item>
+
+						<el-submenu index="5" style="float: right;"
+									  class="right el-col el-col-24 el-col-xs-0 el-col-sm-4 el-col-md-4 el-col-lg-4 el-col-xl-4">
+							<template slot="title">
+								<span v-if="user != null && user != ''">
+									{{user.username}} &nbsp;&nbsp;&nbsp;
+									<a href="javascript:void(0)" v-on:click="zhuxiao" style="font-weight: normal;">注销</a>
+								</span>
+								<span  v-else>
+									<a href="login.html" target="_self">登录</a>  &nbsp;&nbsp;&nbsp;
+									<a href="register.html" target="_self">注册</a>
+								</span>
+							</template>
+							<el-menu-item index="5-3"><a href="index.html" target="_self">运单查询</a></el-menu-item>
+							<el-menu-item index="5-4"><a href="info.html" target="iframe">货源信息</a></el-menu-item>
+							<el-menu-item index="5-5"><a href="car.html" target="iframe">车源信息</a></el-menu-item>
+							<el-menu-item index="5-6"><a href="onlineOrder.html" target="iframe">在线下单</a></el-menu-item>
+							<el-menu-item index="5-6"><a href="order.html" target="iframe" v-if="user != null && user != ''">我的订单</a></el-menu-item>
+							<el-menu-item index="5-7"><a href="personal.html" target="iframe" v-if="user != null && user != ''">我的信息</a></el-menu-item>
+						</el-submenu>
+
+					  <el-submenu index="7"
+					  	class="el-col el-col-24 el-col-xs-2 el-col-sm-0 el-col-md-0 el-col-lg-0 el-col-xl-0">
+					  	<template slot="title"><i class="el-icon-more-outline"></i></template>
+					  	<el-menu-item index="7-1"><a href="login.html" target="_blank">登录</a></el-menu-item>
+					    <el-menu-item index="7-2"><a href="register.html" target="_blank">注册</a></el-menu-item>
+					    <el-menu-item index="7-3"><a href="index.html" target="_self">运单查询</a></el-menu-item>
+					    <el-menu-item index="7-4"><a href="info.html" target="iframe">货源信息</a></el-menu-item>
+					    <el-menu-item index="7-5"><a href="car.html" target="iframe">车源信息</a></el-menu-item>
+					    <el-menu-item index="7-6"><a href="onlineOrder.html" target="iframe">在线下单</a></el-menu-item>
+					    <el-menu-item index="7-6"><a href="order.html" target="iframe" v-if="user != null && user != ''">我的订单</a></el-menu-item>
+						  <el-menu-item index="7-7"><a href="personal.html" target="iframe" v-if="user != null && user != ''">我的信息</a></el-menu-item>
+					  </el-submenu>
+					</el-menu>				
+				</div>
+			</div>
+
+
+			<!-- 内容  搜索 -->
+			<div>
+				<iframe name="iframe" src="search.html" frameborder="0" width="100%" height="540px" ></iframe>
+			</div>
+			
+			<!-- 底部 -->
+			<div>
+				<div class="footer">
+					Copyright © 2019-2020 恩典配货系统. All rights reserved.
+				</div>
+			</div>
+			
+		</div>
+		
+		
+		<!--  Vue中的vm模块  -->
+    <script type="text/javascript">
+        new Vue({
+            el: '#app',
+            //Vue中的model模块。
+            data: {
+				//登录用户的信息
+				user:{
+					username:'',
+					role:''
+				}
+            },
+            methods: {
+            	tableRowClassName({row, rowIndex}) {
+			        if (rowIndex === 1) {
+			          return 'warning-row';
+			        } else if (rowIndex === 3) {
+			          return 'success-row';
+			        }
+			        return '';
+			    },
+				handleSelect(key, keyPath) {
+					console.log(key, keyPath);
+				},
+				zhuxiao:function () {
+					axios.get('/bos/user/cleanSessionLoginUser').then(function (response) {
+						alert(response.data.message);
+						window.location.href = "/bos/index.html";
+					}).catch(function () {
+
+					});
+				}
+            },
+            //异步请求 axios
+            mounted:function() {
+            	var _this = this;
+				//查询用户登录信息
+				axios.get('/bos/user/getSessionLoginUser').then(function (response) {
+					// alert(response.data);
+					_this.user = response.data;
+				}).catch(function () {
+
+				});
+			}
+        })
+    </script>
+	</body>
+</html>
